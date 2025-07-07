@@ -47,18 +47,27 @@ KhoaHocOnline/
 │   ├── AccountController.cs
 │   ├── CoursesController.cs
 │   ├── CourseMaterialsController.cs
+|   ├── UsersController.cs
 │   └── AnnouncementsController.cs
 ├── Models/
 │   ├── User.cs
 │   ├── Course.cs
 │   ├── Enrollment.cs
 │   ├── CourseMaterial.cs
-│   └── Announcement.cs
+|   ├── CourseDetailVM.cs
+|   ├── DangKyKhoaHocContext.cs
+|   ├── ErrorViewModel.cs
+|   ├── FeedBack.cs
+|   ├── Login.cs
+|   ├── LoginHistory.cs
+|   ├── Register.cs
+│   └── CourseAnnouncement.cs
 ├── Views/
 │   ├── Account/
 │   ├── Courses/
 │   ├── CourseMaterials/
 │   ├── Announcements/
+│   ├── Users/
 │   └── Shared/
 ├── wwwroot/
 │   ├── css/
