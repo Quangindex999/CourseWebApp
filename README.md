@@ -114,14 +114,11 @@ Mở dự án trong Visual Studio và nhấn `F5` để chạy.
 | Sinh viên | Đăng ký khóa học, tải tài liệu, xem thông báo |
 
 ## 👨‍💻 Thành viên thực hiện
-
-- [Tên sinh viên 1]
-- [Tên sinh viên 2]
-- [Tên sinh viên 3]
+- [Nguyễn Nhật Quang]
 
 ## 👩‍🏫 Giảng viên hướng dẫn
 
-- [Tên giảng viên]
+- [Phạm Văn Tiệp]
 
 ## 📌 Giấy phép
 
