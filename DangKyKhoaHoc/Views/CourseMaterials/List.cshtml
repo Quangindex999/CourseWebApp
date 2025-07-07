@@ -1,0 +1,73 @@
+﻿@model IEnumerable<DangKyKhoaHoc.Models.CourseMaterial>
+
+@{
+    ViewData["Title"] = "Tài liệu khoá học";
+}
+
+<h2 class="fw-bold text-primary mb-3"><i class="bi bi-folder"></i> Danh sách tài liệu</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">@TempData["Message"]</div>
+}
+
+@if (Model.Any())
+{
+    <table class="table table-bordered table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Tên tài liệu</th>
+                <th>Ngày upload</th>
+                <th>Tải xuống</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>
+                        @(item.UploadAt.HasValue? item.UploadAt.Value.ToString("dd/MM/yyyy HH:mm") : "—")
+                    </td>
+                    <td>
+                        <a href="@item.FilePath" class="btn btn-outline-primary btn-sm" target="_blank">
+                            <i class="bi bi-download"></i> Download
+                        </a>
+
+                        @{
+                            var role = Context.Session.GetString("Role");
+                            var fullName = Context.Session.GetString("FullName");
+                            var isTeacherOwner = false;
+                            //Tìm khoá học tương ứng để so sáng Instructor
+                            var course = item.Course ?? null;
+                            if(course == null && ViewBag.Course != null)
+                            {
+                                course = (DangKyKhoaHoc.Models.Course)ViewBag.Course;
+                            }
+                            if (course != null && role == "teacher" && course.Instructor == fullName)
+                            {
+                                isTeacherOwner = true;
+                            }
+                            @if (role == "admin" || isTeacherOwner)
+                            {
+                                <form asp-action="Delete" asp-controller="CourseMaterials" method="post" style="display:inline" 
+                                      onsubmit="return confirm('Bạn chắc chắn muốn xoá tài liệu này?');">
+                                    <input type="hidden" name="id" value="@item.MaterialsId" />
+                                    <input type="hidden" name="courseId" value="@item.CourseId" />
+                                    <button type="submit" class="btn btn-outline-danger btn-sm ms-1">
+                                        <i class="bi bi-trash"></i> Xoá
+                                    </button>
+                                </form>
+                            }
+                        }
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-warning">Chưa có tài liệu nào cho khoá học này.</div>
+}

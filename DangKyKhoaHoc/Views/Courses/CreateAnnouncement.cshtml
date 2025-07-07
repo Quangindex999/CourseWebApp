@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Tạo thông báo mới";
+}
+
+<h2 class="fw-bold text-success mb-4">
+    <i class="bi bi-chat-dots"></i> Tạo thông báo cho khoá học
+</h2>
+
+<form asp-action="CreateAnnouncement" method="post">
+    <input type="hidden" name="courseId" value="@ViewBag.CourseId" />
+
+    <div class="mb-3">
+        <label for="title" class="form-label fw-semibold">Tiêu đề thông báo:</label>
+        <input type="text" id="title" name="title" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label for="announcementMessage" class="form-label fw-semibold">Nội dung thông báo:</label>
+        <textarea id="announcementMessage" name="announcementMessage" class="form-control" rows="4" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        <i class="bi bi-send"></i> Gửi thông báo
+    </button>
+</form>

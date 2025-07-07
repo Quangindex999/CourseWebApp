@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "Thống kê hệ thống";
+}
+
+<h2 class="fw-bold mb-4 text-primary"><i class="bi bi-bar-chart"></i>Thống kê hệ thống</h2>
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card shadow text-center">
+            <div class="card-header bg-info text-white fw-bold">
+                <i class="bi bi-people"></i> Tổng người dùng
+            </div>
+            <div class="card-body">
+                <h3>@ViewBag.TotalUsers</h3>
+                <span class="text-muted">Sinh viên: @ViewBag.TotalStudents, Giảng viên: @ViewBag.TotalTeachers, Admin: @ViewBag.TotalAdmins</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow text-center">
+            <div class="card-header bg-primary text-white fw-bold">
+                <i class="bi bi-journal-bookmark"></i> Tổng khóa học
+            </div>
+            <div class="card-body">
+                <h3>@ViewBag.TotalCourses</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow text-center">
+            <div class="card-header bg-success text-white fw-bold">
+                <i class="bi bi-check-circle"></i> Tổng lượt đăng ký
+            </div>
+            <div class="card-body">
+                <h3>@ViewBag.TotalEnrollments</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow text-center">
+            <div class="card-header bg-warning text-dark fw-bold">
+                <i class="bi bi-chat-dots"></i> Tổng feedback
+            </div>
+            <div class="card-body">
+                <h3>@ViewBag.TotalFeedbacks</h3>
+            </div>
+        </div>
+    </div>
+</div>

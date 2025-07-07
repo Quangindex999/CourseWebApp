@@ -1,0 +1,66 @@
+﻿@model IEnumerable<DangKyKhoaHoc.Models.Course>
+
+@{
+    ViewData["Title"] = "Khoá học tôi giảng dạy";
+}
+
+<h2 class="fw-bold text-primary mb-4"><i class="bi bi-mortarboard"></i> Khoá học tôi giảng dạy</h2>
+
+@if (Model.Any())
+{
+    <table class="table table-bordered table-striped align-middle shadow">
+        <thead class="table-light">
+            <tr>
+                <th>Tiêu đề</th>
+                <th>Mô tả</th>
+                <th>Ngày bắt đầu</th>
+                <th>Ngày kết thúc</th>
+                <th>Sức chứa</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.CourseDescription</td>
+                    <td>@item.StartDate.ToShortDateString()</td>
+                    <td>@item.EndDate.ToShortDateString()</td>
+                    <td>@item.Capacity</td>
+                    <td>
+                        <a class="btn btn-outline-primary btn-sm me-1" asp-action="Edit" asp-route-id="@item.CourseId">
+                            <i class="bi bi-pencil"></i> Sửa
+                        </a>
+                        <a class="btn btn-outline-info btn-sm me-1" asp-action="Details" asp-route-id="@item.CourseId">
+                            <i class="bi bi-info-circle"></i> Chi tiết
+                        </a>
+                        <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@item.CourseId"
+                           onclick="return confirm('Bạn có chắc muốn xóa khoá học này?')">
+                            <i class="bi bi-trash"></i> Xóa
+                        </a>
+                        <a class="btn btn-outline-secondary btn-sm"
+                           asp-controller="CourseMaterials" asp-action="List" asp-route-courseId="@item.CourseId">
+                            <i class="bi bi-folder"></i> Tài liệu
+                        </a>
+                        <a class="btn btn-outline-success btn-sm"
+                           asp-controller="CourseMaterials" asp-action="Upload" asp-route-courseId="@item.CourseId">
+                            <i class="bi bi-upload"></i> Upload
+                        </a>
+                        <a class="btn btn-outline-primary btn-sm" asp-action="ViewAnnouncements" asp-route-courseId="@item.CourseId">
+                            <i class="bi bi-chat-dots"></i> Xem thông báo
+                        </a>
+                        <a class="btn btn-outline-success btn-sm" asp-action="CreateAnnouncement" asp-route-courseId="@item.CourseId">
+                            <i class="bi bi-plus-circle"></i> Tạo thông báo
+                        </a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-warning">Bạn chưa giảng dạy khoá học nào!</div>
+}

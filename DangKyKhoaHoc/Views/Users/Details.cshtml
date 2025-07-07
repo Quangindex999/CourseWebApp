@@ -1,0 +1,58 @@
+﻿@model DangKyKhoaHoc.Models.User
+
+@{
+    ViewData["Title"] = "Chi tiết tài khoản";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-7 col-lg-6">
+        <div class="card shadow">
+            <div class="card-header bg-info text-white text-center">
+                <h3 class="fw-bold mb-0">
+                    <i class="bi bi-person-badge"></i> Thông tin tài khoản
+                </h3>
+            </div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-4 text-end fw-semibold">Mã số:</dt>
+                    <dd class="col-sm-8">@Model.UserId</dd>
+
+                    <dt class="col-sm-4 text-end fw-semibold">Họ tên:</dt>
+                    <dd class="col-sm-8">@Model.FullName</dd>
+
+                    <dt class="col-sm-4 text-end fw-semibold">Email:</dt>
+                    <dd class="col-sm-8">@Model.Email</dd>
+
+                    <dt class="col-sm-4 text-end fw-semibold">Vai trò:</dt>
+                    <dd class="col-sm-8">
+                        @if (Model.Role == "admin")
+                        {
+                            <span class="badge bg-danger"><i class="bi bi-person-gear"></i> Admin</span>
+                        }
+                        else if (Model.Role == "teacher")
+                        {
+                            <span class="badge bg-info text-dark"><i class="bi bi-mortarboard"></i> Teacher</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-success"><i class="bi bi-person"></i> Student</span>
+                        }
+                    </dd>
+
+                    <dt class="col-sm-4 text-end fw-semibold">Ngày tạo:</dt>
+                    <dd class="col-sm-8">
+                        @(Model.CreatedAt.HasValue? Model.CreatedAt.Value.ToString("dd/MM/yyyy") : "—")
+                    </dd>
+                </dl>
+            </div>
+            <div class="card-footer text-end">
+                <a asp-action="Edit" asp-route-id="@Model.UserId" class="btn btn-primary me-2">
+                    <i class="bi bi-pencil-square"></i> Sửa
+                </a>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Quay lại
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

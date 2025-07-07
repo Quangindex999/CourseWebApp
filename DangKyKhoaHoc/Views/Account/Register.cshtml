@@ -1,0 +1,69 @@
+﻿@model DangKyKhoaHoc.Models.Register
+
+@{
+    ViewData["Title"] = "Đăng ký tài khoản";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white text-center">
+                <h3 class="fw-bold mb-0">
+                    <i class="bi bi-person-plus"></i> Đăng ký tài khoản
+                </h3>
+            </div>
+            <div class="card-body">
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger text-center">@ViewBag.Error</div>
+                }
+                @if (ViewBag.Success != null)
+                {
+                    <div class="alert alert-success text-center">@ViewBag.Success</div>
+                }
+                <form asp-action="Register" method="post">
+                    <div class="mb-3">
+                        <label asp-for="FullName" class="form-label fw-semibold"></label>
+                        <input asp-for="FullName" class="form-control" placeholder="Họ tên đầy đủ" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label fw-semibold"></label>
+                        <input asp-for="Email" class="form-control" placeholder="Email" type="email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label fw-semibold"></label>
+                        <input asp-for="Password" class="form-control" placeholder="Mật khẩu" type="password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Role" class="form-label fw-semibold"></label>
+                        <select asp-for="Role" class="form-select">
+                            <option value="">-- Chọn vai trò --</option>
+                            <option value="student">Học viên</option>
+                            <option value="teacher">Giảng viên</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                        <span asp-validation-for="Role" class="text-danger"></span>
+                    </div>
+                    <div class="d-grid mb-2">
+                        <button type="submit" class="btn btn-success fw-bold">
+                            <i class="bi bi-person-plus"></i> Đăng ký
+                        </button>
+                    </div>
+                    <div class="text-center">
+                        <span>Đã có tài khoản?</span>
+                        <a asp-action="Login" class="link-success fw-semibold">Đăng nhập</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

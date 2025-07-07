@@ -1,0 +1,69 @@
+﻿@model IEnumerable<DangKyKhoaHoc.Models.User>
+
+@{
+    ViewData["Title"] = "Quản lý người dùng";
+}
+
+<h2 class="fw-bold mb-4 text-primary text-center">
+    <i class="bi bi-people"></i> Quản lý người dùng
+</h2>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="fs-5 fw-semibold text-secondary">Tổng số tài khoản: @Model.Count()</span>
+            <a class="btn btn-success" asp-action="Create">
+                <i class="bi bi-person-plus"></i> Thêm mới
+            </a>
+        </div>
+        <table class="table table-bordered table-striped align-middle">
+            <thead class="table-light text-center">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.First().UserId)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().FullName)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().Email)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().Role)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().CreatedAt)</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">@item.UserId</td>
+                        <td>@item.FullName</td>
+                        <td>@item.Email</td>
+                        <td class="text-center">
+                            @if (item.Role == "admin")
+                            {
+                                <span class="badge bg-danger"><i class="bi bi-person-gear"></i> Admin</span>
+                            }
+                            else if (item.Role == "teacher")
+                            {
+                                <span class="badge bg-info text-dark"><i class="bi bi-mortarboard"></i> Teacher</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success"><i class="bi bi-person"></i> Student</span>
+                            }
+                        </td>
+                        <td class="text-center">@(item.CreatedAt.HasValue? item.CreatedAt.Value.ToString("dd/MM/yyyy") : "—")</td>
+                        <td class="text-center">
+                            <a class="btn btn-outline-info btn-sm me-1" asp-action="Details" asp-route-id="@item.UserId">
+                                <i class="bi bi-info-circle"></i>
+                            </a>
+                            <a class="btn btn-outline-primary btn-sm me-1" asp-action="Edit" asp-route-id="@item.UserId">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@item.UserId"
+                               onclick="return confirm('Bạn có chắc chắn muốn xóa tài khoản này?')">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<DangKyKhoaHoc.Models.Course>
+@{
+    ViewData["Title"] = "Danh sách khoá học đã đăng ký";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">@TempData["Message"]</div>
+}
+
+@if(Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tiêu đề</th>
+                <th>Giảng viên</th>
+                <th>Ngày bắt đầu</th>
+                <th>Ngày kết thúc</th>
+                <th>Đánh giá</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var course in Model)
+            {
+                <tr>
+                    <td>@course.Title</td>
+                    <td>@course.Instructor</td>
+                    <td>@course.StartDate.ToShortDateString()</td>
+                    <td>@course.EndDate.ToShortDateString()</td>
+
+                    <td>
+                        <form asp-action="Unenroll" asp-controller="Courses" method="post" style="display: inline">
+                            <input type="hidden" name="courseId" value="@course.CourseId" />
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn chắc chắn muốn huỷ đăng ký khoá học này?')">Huỷ đăng ký</button>
+                        </form>
+                    </td>
+                    <td>
+                        <a asp-action="FeedBack" asp-route-courseId="@course.CourseId" class="btn btn-primary btn-sm">Đánh giá</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Hiện tại bạn chưa đăng ký khoá học nào.</p>
+}
+
+

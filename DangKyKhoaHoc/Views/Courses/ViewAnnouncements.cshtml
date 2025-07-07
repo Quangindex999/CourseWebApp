@@ -1,0 +1,28 @@
+﻿@model IEnumerable<DangKyKhoaHoc.Models.CourseAnnouncement>
+
+@{
+    ViewData["Title"] = "Quản lý thông báo khoá học";
+}
+
+<h2 class="fw-bold text-primary mb-4">
+    <i class="bi bi-chat-dots"></i> Các thông báo khoá học
+</h2>
+
+@if (Model.Any())
+{
+    <ul class="list-group">
+        @foreach (var announcement in Model)
+        {
+            <li class="list-group-item">
+                <strong>@announcement.Title</strong> -
+                <span>@announcement.CreatedAt?.ToString("dd/MM/yyyy HH:mm")</span>
+                <p>@announcement.AnnouncementMessage</p>
+            </li>
+        }
+
+    </ul>
+}
+else
+{
+    <div class="alert alert-info">Chưa có thông báo nào cho khoá học này.</div>
+}

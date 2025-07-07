@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Upload tài liệu";
+    var course = ViewBag.Course as DangKyKhoaHoc.Models.Course;
+}
+
+<h2 class="fw-bold text-success mb-3">
+    <i class="bi bi-upload"></i> Upload tài liệu cho khoá: <span class="text-primary">@course.Title</span>
+</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<form asp-action="Upload" asp-route-courseId="@course.CourseId" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label class="form-label fw-semibold">Chọn file tài liệu:</label>
+        <input type="file" name="file" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-success">
+        <i class="bi bi-upload"></i> Upload
+    </button>
+    <a asp-action="List" asp-route-courseId="@course.CourseId" class="btn btn-secondary ms-2">
+        <i class="bi bi-folder"></i> Xem tài liệu
+    </a>
+</form>
